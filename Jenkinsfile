@@ -25,7 +25,7 @@ pipeline {
                     steps {
                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']]){
                             //dir('infra') 
-                            {
+                        {
                             sh 'echo "=================Terraform Init=================="'
                             sh 'terraform init'
                         }
