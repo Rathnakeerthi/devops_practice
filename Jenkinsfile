@@ -25,7 +25,8 @@ pipeline {
                     steps {
                        withCredentials([[
                         $class: 'AmazonWebServicesCredentialsBinding', 
-                        credentialsId: 'Jenkins_user']]){
+                        credentialsId: 'Jenkins_user']])
+                    {
                             // credentialsId: 'Jenkins_user' : provide yout credential id
                             //dir('infra') : curently no directory avaialble in the repo
                             {
