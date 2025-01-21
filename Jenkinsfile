@@ -25,8 +25,8 @@ pipeline {
                     steps {
                        withCredentials([[
                         $class: 'AmazonWebServicesCredentialsBinding', 
-                        credentialsId: 'aws-crendentails-rwagh']]){
-                            // credentialsId: 'aws-crendentails-rwagh' : provide yout credential id
+                        credentialsId: 'Jenkins_user']]){
+                            // credentialsId: 'Jenkins_user' : provide yout credential id
                             //dir('infra') : curently no directory avaialble in the repo
                             {
                             sh 'echo "=================Terraform Init=================="'
@@ -40,8 +40,9 @@ pipeline {
             steps {
                 script {
                     if (params.PLAN_TERRAFORM) {
-                       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-crendentails-rwagh']]){
-                            dir('infra') {
+                       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']]){
+                            //dir('infra')
+                             {
                                 sh 'echo "=================Terraform Plan=================="'
                                 sh 'terraform plan'
                             }
@@ -55,7 +56,7 @@ pipeline {
             steps {
                 script {
                     if (params.APPLY_TERRAFORM) {
-                       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-crendentails-rwagh']]){
+                       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']]){
                             //dir('infra') 
                             {
                                 sh 'echo "=================Terraform Apply=================="'
@@ -71,7 +72,7 @@ pipeline {
             steps {
                 script {
                     if (params.DESTROY_TERRAFORM) {
-                       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-crendentails-rwagh']]){
+                       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']]){
                             dir('infra') {
                                 sh 'echo "=================Terraform Destroy=================="'
                                 sh 'terraform destroy -auto-approve'
