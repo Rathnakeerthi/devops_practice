@@ -11,7 +11,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Clean workspace before cloning (optional)
-                deleteDir()
+                //deleteDir()
 
                 // Clone the Git repository
                 git branch: 'main',
@@ -23,12 +23,8 @@ pipeline {
 
         stage('Terraform Init') {
                     steps {
-                       withCredentials([[
-                        $class: 'AmazonWebServicesCredentialsBinding', 
-                        credentialsId: 'Jenkins_user']])
-                    {
-                            // credentialsId: 'Jenkins_user' : provide yout credential id
-                            //dir('infra') : curently no directory avaialble in the repo
+                       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']]){
+                            //dir('infra') 
                             {
                             sh 'echo "=================Terraform Init=================="'
                             sh 'terraform init'
@@ -42,8 +38,8 @@ pipeline {
                 script {
                     if (params.PLAN_TERRAFORM) {
                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']]){
-                            //dir('infra')
-                             {
+                           // dir('infra') 
+                            {
                                 sh 'echo "=================Terraform Plan=================="'
                                 sh 'terraform plan'
                             }
@@ -74,7 +70,8 @@ pipeline {
                 script {
                     if (params.DESTROY_TERRAFORM) {
                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']]){
-                            dir('infra') {
+                            //dir('infra') 
+                            {
                                 sh 'echo "=================Terraform Destroy=================="'
                                 sh 'terraform destroy -auto-approve'
                             }
