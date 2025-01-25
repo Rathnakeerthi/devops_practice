@@ -1,16 +1,16 @@
 
 
-properties([parameters([booleanParam(description: 'Check to plan Terraform changes', name: 'PLAN_TERRAFORM'), booleanParam(description: 'Check to apply Terraform changes', name: 'APPLY_TERRAFOR'), booleanParam(description: 'Check to apply Terraform changes', name: 'DESTROY_TERRAFORM')])])
+//properties([parameters([booleanParam(description: 'Check to plan Terraform changes', name: 'PLAN_TERRAFORM'), booleanParam(description: 'Check to apply Terraform changes', name: 'APPLY_TERRAFOR'), booleanParam(description: 'Check to apply Terraform changes', name: 'DESTROY_TERRAFORM')])])
 
 
 pipeline {
     agent any
 
-    // parameters {
-    //         booleanParam(name: 'PLAN_TERRAFORM', defaultValue: false, description: 'Check to plan Terraform changes')
-    //         booleanParam(name: 'APPLY_TERRAFORM', defaultValue: false, description: 'Check to apply Terraform changes')
-    //         booleanParam(name: 'DESTROY_TERRAFORM', defaultValue: false, description: 'Check to apply Terraform changes')
-    // }
+    parameters {
+            booleanParam(name: 'PLAN_TERRAFORM', defaultValue: false, description: 'Check to plan Terraform changes')
+            booleanParam(name: 'APPLY_TERRAFORM', defaultValue: false, description: 'Check to apply Terraform changes')
+            booleanParam(name: 'DESTROY_TERRAFORM', defaultValue: false, description: 'Check to apply Terraform changes')
+    }
 
     stages {
         stage('Clone Repository') {
