@@ -27,10 +27,9 @@ pipeline {
         }
 
         stage('Terraform Init') {
-                    steps 
-                    {
+                    steps{
                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']]){
-                        //dir('infra')
+                      
                         {
                             sh 'echo "=================Terraform Init=================="'
                             sh 'terraform init'
@@ -45,7 +44,7 @@ pipeline {
                     if (params.PLAN_TERRAFORM) {
                         /* groovylint-disable-next-line DuplicateListLiteral */
                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']]){
-                            // dir('infra') 
+
                             {
                                 sh 'echo "=================Terraform Plan=================="'
                                 sh 'terraform plan'
@@ -61,7 +60,7 @@ pipeline {
                 script {
                     if (params.APPLY_TERRAFORM) {
                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']]){
-                            //dir('infra') 
+                           
                             {
                                 sh 'echo "=================Terraform Apply=================="'
                                 sh 'terraform apply -auto-approve'
@@ -77,8 +76,8 @@ pipeline {
                 script {
                     if (params.DESTROY_TERRAFORM) {
                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']]){
-                            //dir('infra')
-                            {
+                        {
+                            //hi
                                 sh 'echo "=================Terraform Destroy=================="'
                                 sh 'terraform destroy -auto-approve'
                             }
