@@ -41,13 +41,13 @@ pipeline {
                 script {
                     if (params.PLAN_TERRAFORM) {
                         /* groovylint-disable-next-line DuplicateListLiteral */
-                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']]){
+                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']])
 
                             {
                                 sh 'echo "=================Terraform Plan=================="'
                                 sh 'terraform plan'
                             }
-                        }
+                        
                     }
                 }
             }
@@ -57,13 +57,13 @@ pipeline {
             steps {
                 script {
                     if (params.APPLY_TERRAFORM) {
-                       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']]){
+                       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']])
                            
                             {
                                 sh 'echo "=================Terraform Apply=================="'
                                 sh 'terraform apply -auto-approve'
                             }
-                       }
+                       
                     }
                 }
             }
@@ -73,13 +73,13 @@ pipeline {
             steps {
                 script {
                     if (params.DESTROY_TERRAFORM) {
-                       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']]){
-                        {
+                       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'Jenkins_user']])
+                            {
                             //hi
                                 sh 'echo "=================Terraform Destroy=================="'
                                 sh 'terraform destroy -auto-approve'
                             }
-                       }
+                       
                     }
                 }
             }
